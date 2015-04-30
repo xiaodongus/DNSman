@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DNS man</string>
+
+    <string name="dnssetted">DNS setted.</string>
+    <string name="mobilenet_changed">Mobile network has been changed. Setting DNS now.</string>
+    <string name="action_settings">Settings</string>
+</resources>
