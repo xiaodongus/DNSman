@@ -1,8 +1,8 @@
 package io.github.otakuchiyan.dnsman;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+
+import io.github.otakuchiyan.dnsman.DNSManager;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -50,30 +52,17 @@ public class MainActivity extends ActionBarActivity {
         EditText mobileNetDNS2 = (EditText)findViewById(R.id.mobileDNS2);
         final String mobileDNS1addr = new String(mobileNetDNS1.getText().toString());
         final String mobileDNS2addr = new String(mobileNetDNS2.getText().toString());
-        //DataInputStream dis = null;
-        DataOutputStream dos = null;
 
-        try {
-            Process proc = Runtime.getRuntime().exec("su");
+        Log.d("DNS1", mobileDNS1addr);
+        Log.d("DNS2", mobileDNS2addr);
 
-            dos = new DataOutputStream(proc.getOutputStream());
-            dos.writeBytes("setprop net.dns1 " + mobileDNS1addr + "\n");
-            dos.flush();
-            dos.writeBytes("setprop net.dns2 " + mobileDNS2addr + "\n");
-            dos.flush();
-            dos.writeBytes("exit\n");
-            proc.waitFor();
-        } catch (Exception err){
-            err.printStackTrace();
-        } finally {
-            if (dos != null) {
-                try {
-                    dos.close();
-                } catch (Exception err){
-                    err.printStackTrace();
-                }
-            }
-        }
+        SharedPreferences settings = getSharedPreferences("Settings", MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("mDNS1", mobileDNS1addr);
+        editor.putString("mDNS2", mobileDNS2addr);
+
+        DNSManager dns = new DNSManager();
+        dns.setMobileNetDNS(mobileDNS1addr, mobileDNS2addr);
         Toast.makeText(this, R.string.dnssetted, Toast.LENGTH_SHORT).show();
     }
 }
