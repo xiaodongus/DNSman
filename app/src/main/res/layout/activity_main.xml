@@ -5,12 +5,38 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
-    <CheckBox
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mobile network"
-        android:id="@+id/mobileNetCheckBox"
-        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:id="@+id/mDNS1"
+        android:hint="DNS1"
+        android:inputType="text"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/mDNS2"
+        android:layout_alignStart="@+id/mDNS2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mDNS2"
+        android:hint="DNS2"
+        android:inputType="text"
+        android:layout_below="@+id/mDNS1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wDNS1"
+        android:hint="DNS1"
+        android:inputType="text"
+        android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -19,71 +45,52 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/mobileDNS1"
-        android:layout_below="@+id/mobileNetCheckBox"
-        android:layout_alignLeft="@+id/mobileNetCheckBox"
-        android:layout_alignStart="@+id/mobileNetCheckBox"
-        android:hint="DNS1" />
+        android:id="@+id/wDNS2"
+        android:hint="DNS2"
+        android:layout_below="@+id/wDNS1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/wDNS1"
+        android:layout_alignEnd="@+id/wDNS1"
+        android:inputType="text" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/mobileDNS2"
-        android:layout_below="@+id/mobileDNS1"
-        android:hint="DNS2" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wi-Fi network"
-        android:id="@+id/wifiNetCheckBox"
-        android:layout_below="@+id/mobileDNS2"
-        android:layout_alignLeft="@+id/mobileDNS2"
-        android:layout_alignStart="@+id/mobileDNS2" />
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Use same DNS"
-        android:id="@+id/sameDNSswitch"
+        android:text="https://github.com/otakuchiyan/DNSman"
+        android:id="@+id/textView"
+        android:layout_below="@+id/wDNS2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="35dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/mobileDNS2" />
+        android:textSize="12dp" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/wifiDNS1"
-        android:layout_below="@+id/wifiNetCheckBox"
-        android:layout_alignRight="@+id/mobileDNS2"
-        android:layout_alignEnd="@+id/mobileDNS2"
-        android:inputType="numberDecimal"
-        android:hint="DNS1" />
+        android:id="@+id/textView2"
+        android:text="@string/mobile_hint"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/wifiDNS2"
-        android:layout_below="@+id/wifiDNS1"
-        android:layout_alignLeft="@+id/wifiDNS1"
-        android:layout_alignStart="@+id/wifiDNS1"
-        android:digits="1234567890."
-        android:hint="DNS2" />
+        android:text="@string/wifi_hint"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/mDNS2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set DNS now"
-        android:id="@+id/setButton"
-        android:onClick="setButtonOnClick"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/wifiDNS2"
-        android:layout_alignStart="@+id/wifiDNS2"
-        android:layout_alignRight="@+id/sameDNSswitch"
-        android:layout_alignEnd="@+id/sameDNSswitch" />
-
+        android:text="Copyleft (c) otakuchiyan 2015"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

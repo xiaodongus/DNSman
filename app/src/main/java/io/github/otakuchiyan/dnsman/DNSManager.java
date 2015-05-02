@@ -4,6 +4,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.DataOutputStream;
 
+
 /**
  * Created by nanafa on 2015/5/1.
  */
@@ -11,8 +12,8 @@ public class DNSManager {
     public int setMobileNetDNS(String DNS1, String DNS2){
 
         if(DNS1 != null && DNS2 != null) {
-            Log.d("DNS", DNS1);
-            Log.d("DNS", DNS2);
+            Log.d("DNSManager", DNS1);
+            Log.d("DNSManager", DNS2);
             DataOutputStream dos = null;
 
             try {

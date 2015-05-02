@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.NotificationCompat;
@@ -27,10 +28,12 @@ public class NetworkCheckReceiver extends BroadcastReceiver {
                     .setContentText(R.string.mobilenet_changed);
             */
 
-            SharedPreferences settings = context.getSharedPreferences("Settings", context.MODE_PRIVATE);
+            SharedPreferences sp = context.getSharedPreferences("dnsconf", Context.MODE_PRIVATE);
             //FIXME: return DNS value use setting's value.
-            String mDNS1 = (String) settings.getString("mDNS1", "8.8.8.8");
-            String mDNS2 = (String) settings.getString("mDNS2", "8.8.4.4");
+            String mDNS1 = sp.getString("mDNS1", "8.8.8.8");
+            String mDNS2 = sp.getString("mDNS2", "8.8.4.4");
+            Log.d("NCR", mDNS1);
+            Log.d("NCR", mDNS2);
             if (dns.setMobileNetDNS(mDNS1, mDNS2) == 1) {
                 Toast.makeText(context, R.string.mobilenet_change_failed, Toast.LENGTH_LONG).show();
             } else {

@@ -1,5 +1,6 @@
 package io.github.otakuchiyan.dnsman;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -17,13 +19,23 @@ import java.io.DataInputStream;
 import io.github.otakuchiyan.dnsman.DNSManager;
 
 public class MainActivity extends ActionBarActivity {
+    private SharedPreferences sp;
+    private SharedPreferences.Editor sped;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sp = this.getSharedPreferences("dnsconf", Context.MODE_PRIVATE);
+        EditText mDNS1 = (EditText) findViewById(R.id.mDNS1);
+        EditText mDNS2 = (EditText) findViewById(R.id.mDNS2);
+        EditText wDNS1 = (EditText) findViewById(R.id.wDNS1);
+        EditText wDNS2 = (EditText) findViewById(R.id.wDNS2);
+        mDNS1.setText(sp.getString("mDNS1", ""));
+        mDNS2.setText(sp.getString("mDNS2", ""));
+        wDNS1.setText(sp.getString("wDNS1", ""));
+        wDNS2.setText(sp.getString("wDNS2", ""));
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -34,35 +46,30 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        sp = this.getSharedPreferences("dnsconf", Context.MODE_PRIVATE);
+        sped = sp.edit();
+
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_save) {
+            EditText mDNS1 = (EditText)findViewById(R.id.mDNS1);
+            EditText mDNS2 = (EditText)findViewById(R.id.mDNS2);
+            EditText wDNS1 = (EditText)findViewById(R.id.wDNS1);
+            EditText wDNS2 = (EditText)findViewById(R.id.wDNS2);
+            sped.putString("mDNS1", mDNS1.getText().toString());
+            sped.putString("mDNS2", mDNS2.getText().toString());
+            sped.putString("wDNS1", wDNS1.getText().toString());
+            sped.putString("wDNS2", wDNS2.getText().toString());
+            sped.commit();
+            Toast.makeText(this, R.string.saved_toast, Toast.LENGTH_SHORT).show();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void setButtonOnClick(View view){
-        EditText mobileNetDNS1 = (EditText)findViewById(R.id.mobileDNS1);
-        EditText mobileNetDNS2 = (EditText)findViewById(R.id.mobileDNS2);
-        final String mobileDNS1addr = new String(mobileNetDNS1.getText().toString());
-        final String mobileDNS2addr = new String(mobileNetDNS2.getText().toString());
-
-        Log.d("DNS1", mobileDNS1addr);
-        Log.d("DNS2", mobileDNS2addr);
-
-        SharedPreferences settings = getSharedPreferences("Settings", MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("mDNS1", mobileDNS1addr);
-        editor.putString("mDNS2", mobileDNS2addr);
-
-        DNSManager dns = new DNSManager();
-        dns.setMobileNetDNS(mobileDNS1addr, mobileDNS2addr);
-        Toast.makeText(this, R.string.dnssetted, Toast.LENGTH_SHORT).show();
-    }
 }
