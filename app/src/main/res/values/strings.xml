@@ -3,7 +3,9 @@
 
     <string name="dnssetted">DNS setted.</string>
     <string name="mobilenet_changed">Mobile network has been changed. Setting DNS now.</string>
-    <string name="mobilenet_change_failed">Mobile network has not changed.</string>
+    <string name="mobilenet_change_failed">Setting the DNS of Mobile network failed.</string>
+    <string name="wifi_changed">Wifi has been changed. Setting DNS now.</string>
+    <string name="wifi_change_failed">Setting the DNS of WiFi failed.</string>
     <string name="action_save">SAVE</string>
     <string name="mobile_hint">Mobile network</string>
     <string name="wifi_hint">Wi-Fi</string>
