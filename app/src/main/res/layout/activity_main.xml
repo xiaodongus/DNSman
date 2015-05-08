@@ -59,13 +59,10 @@
         android:layout_height="wrap_content"
         android:text="https://github.com/otakuchiyan/DNSman"
         android:id="@+id/textView"
-        android:layout_below="@+id/wDNS2"
+        android:textSize="12dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="12dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -88,9 +85,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Copyleft (c) otakuchiyan 2015"
+        android:text="Copyleft (c) otakuchiyan 2015 under GNU GPL v3"
         android:id="@+id/textView4"
-        android:layout_below="@+id/textView"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Root permission"
+        android:id="@+id/su_checkbox"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

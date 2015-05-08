@@ -16,7 +16,7 @@ import java.net.UnknownHostException;
 
 
 /**
- * Created by nanafa on 2015/5/1.
+ * Created by otakuchiyan on 2015/5/1.
  */
 public class DNSManager {
     /*
@@ -45,38 +45,37 @@ public class DNSManager {
     }
     */
 
-    public int setMobileNetDNS(String DNS1, String DNS2){
+    public int setMobileNetDNS(String DNS1, String DNS2, boolean use_su) {
+        Process proc = null;
+        DataOutputStream dos = null;
 
-        if(DNS1 != null && DNS2 != null) {
-            Log.d("DNSManager", DNS1);
-            Log.d("DNSManager", DNS2);
+        try {
+            if (use_su == true) {
+                proc = Runtime.getRuntime().exec("su");
+            } else {
+                proc = Runtime.getRuntime().exec("sh");
+            }
 
-            DataOutputStream dos = null;
-
-            try {
-                Process proc = Runtime.getRuntime().exec("su");
-
-                dos = new DataOutputStream(proc.getOutputStream());
-                dos.writeBytes("setprop net.dns1 " + DNS1 + "\n");
-                dos.flush();
-                dos.writeBytes("setprop net.dns2 " + DNS2 + "\n");
-                dos.flush();
+            dos = new DataOutputStream(proc.getOutputStream());
+            dos.writeBytes("setprop net.dns1 " + DNS1 + "\n");
+            dos.flush();
+            dos.writeBytes("setprop net.dns2 " + DNS2 + "\n");
+            dos.flush();
+            if (use_su == true) {
                 dos.writeBytes("exit\n");
-                proc.waitFor();
-            } catch (Exception err) {
-                err.printStackTrace();
-            } finally {
-                if (dos != null) {
-                    try {
-                        dos.close();
-                    } catch (Exception err) {
-                        err.printStackTrace();
-                    }
+            }
+            proc.waitFor();
+        } catch (Exception err) {
+            err.printStackTrace();
+        } finally {
+            if (dos != null) {
+                try {
+                    dos.close();
+                } catch (Exception err) {
+                    err.printStackTrace();
                 }
             }
-            return 0;
-        } else {
-            return 1;
         }
+        return 0;
     }
 }
