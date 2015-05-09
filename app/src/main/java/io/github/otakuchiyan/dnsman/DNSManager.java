@@ -63,8 +63,8 @@ public class DNSManager {
             dos.flush();
             if (use_su == true) {
                 dos.writeBytes("exit\n");
+                //proc.waitFor();
             }
-            proc.waitFor();
         } catch (Exception err) {
             err.printStackTrace();
         } finally {
