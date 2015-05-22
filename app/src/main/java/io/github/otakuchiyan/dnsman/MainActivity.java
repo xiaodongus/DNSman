@@ -23,7 +23,6 @@ import io.github.otakuchiyan.dnsman.DNSManager;
 public class MainActivity extends ActionBarActivity {
     private SharedPreferences sp;
     private SharedPreferences.Editor sped;
-    //boolean su_chked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +44,6 @@ public class MainActivity extends ActionBarActivity {
         wDNS2.setText(sp.getString("wDNS2", ""));
         su_chkbox.setChecked(sp.getBoolean("use_su", false));
 
-        /*
-        su_chkbox.setOnClickListener(new View.OnClickListener(){
-            @Override
-        public void onClick(View v){
-                CheckBox chkbox = (CheckBox) v;
-                su_chked = chkbox.isChecked();
-            }
-        });
-        */
     }
 
     @Override

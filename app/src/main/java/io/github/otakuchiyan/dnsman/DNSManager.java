@@ -1,81 +1,46 @@
 package io.github.otakuchiyan.dnsman;
 
-import android.content.Intent;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.util.Log;
-import android.content.Context;
-import java.io.IOException;
 import java.io.DataOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.net.InetAddress;
-import java.util.UnknownFormatConversionException;
-import java.net.UnknownHostException;
-
-
+import java.io.IOException;
 /**
  * Created by otakuchiyan on 2015/5/1.
  */
 public class DNSManager {
-    /*
-    public int setWiFiDNS(Context context, String DNS1, String DNS2) throws NoSuchFieldException, IllegalAccessException, UnknownHostException {
-        WifiConfiguration wc = null;
-        WifiManager wm = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wi = wm.getConnectionInfo();
-        List<WifiConfiguration> configuredNetworks = wm.getConfiguredNetworks();
-        for(WifiConfiguration w : configuredNetworks){
-            if(w.networkId == wi.getNetworkId()){
-                wc = w;
-                break;
-            }
-        }
+    String cmd_dns1 = new String("setprop net.dns1 ");
+    String cmd_dns2 = new String("setprop net.dns2 ");
 
-        Object lpf = wc.;
-        if(lpf == null){
-            return 1;
-        }
-        Object lpdf = wc.getDeclaredField("mDnses").get(wc);
-        ArrayList<InetAddress> DNSes = (ArrayList<InetAddress>)lpdf;
-        DNSes.clear();
-        DNSes.add(InetAddress.getByName(DNS1));
-        DNSes.add(InetAddress.getByName(DNS2));
-        return 0;
-    }
-    */
 
-    public int setMobileNetDNS(String DNS1, String DNS2, boolean use_su) {
-        Process proc = null;
+    public int setDNSViaSetprop(String DNS1, String DNS2, boolean use_su) {
+        Process p = null;
         DataOutputStream dos = null;
-
-        try {
-            if (use_su == true) {
-                proc = Runtime.getRuntime().exec("su");
-            } else {
-                proc = Runtime.getRuntime().exec("sh");
+        try{
+            if(use_su == true){
+                p = Runtime.getRuntime().exec("su");
+            }else{
+                p = Runtime.getRuntime().exec("su");
             }
 
-            dos = new DataOutputStream(proc.getOutputStream());
-            dos.writeBytes("setprop net.dns1 " + DNS1 + "\n");
+            dos = new DataOutputStream(p.getOutputStream());
+            dos.writeBytes(cmd_dns1 + DNS1 + "\n");
             dos.flush();
-            dos.writeBytes("setprop net.dns2 " + DNS2 + "\n");
+            dos.writeBytes(cmd_dns2 + DNS2 + "\n");
             dos.flush();
-            if (use_su == true) {
+            if(use_su == true){
                 dos.writeBytes("exit\n");
-                //proc.waitFor();
             }
-        } catch (Exception err) {
-            err.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
         } finally {
-            if (dos != null) {
+            if (dos != null){
                 try {
                     dos.close();
-                } catch (Exception err) {
-                    err.printStackTrace();
+                } catch (IOException e){
+                    e.printStackTrace();
                 }
             }
         }
+        Log.d("DNSManager", "Set DNS.");
         return 0;
     }
 }

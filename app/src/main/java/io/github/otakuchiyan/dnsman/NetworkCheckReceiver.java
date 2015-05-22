@@ -20,24 +20,30 @@ import java.net.UnknownHostException;
 public class NetworkCheckReceiver extends BroadcastReceiver {
     final String CONNECTIVITY_CHANGE_ACTION = new String("android.net.conn.CONNECTIVITY_CHANGE");
 
-    private void setMobileDNS(Context context) {
+    private void setDNS(Context context, int mode) {
         DNSManager dns = new DNSManager();
-        //FIXME: Use notification instead toast
-            /*NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.abc_spinner_textfield_background_material)
-                    .setContentTitle(R.string.app_name)
-                    .setContentText(R.string.mobilenet_changed);
-            */
 
         SharedPreferences sp = context.getSharedPreferences("dnsconf", Context.MODE_PRIVATE);
-        String mDNS1 = sp.getString("mDNS1", "8.8.8.8");
-        String mDNS2 = sp.getString("mDNS2", "8.8.4.4");
+        String dns1 = null;
+        String dns2 = null;
         Boolean use_su = sp.getBoolean("use_su", false);
-        if (dns.setMobileNetDNS(mDNS1, mDNS2, use_su) == 1) {
-            Toast.makeText(context, R.string.mobilenet_change_failed, Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(context, R.string.mobilenet_changed, Toast.LENGTH_LONG).show();
+        //Mobile network
+        if(mode == 0){
+            dns1 = sp.getString("mDNS1", null);
+            dns2 = sp.getString("mDNS2", null);
+        }else{
+            dns1 = sp.getString("wDNS1", null);
+            dns2 = sp.getString("wDNS2", null);
         }
+
+        Log.d("NCR", "DNS1 " + dns1);
+        Log.d("NCR", "DNS2 " + dns2);
+
+        if (dns.setDNSViaSetprop(dns1, dns2, use_su) == 1) {
+                Toast.makeText(context, R.string.set_failed, Toast.LENGTH_LONG).show();
+        } else {
+                Toast.makeText(context, R.string.set_succeed, Toast.LENGTH_LONG).show();
+            }
     }
 
     public void onReceive(Context context, Intent intent) {
@@ -45,10 +51,10 @@ public class NetworkCheckReceiver extends BroadcastReceiver {
         ConnectivityManager connmgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connmgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED) {
             Log.d("NCR", "onReceive TYPE_MOBILE");
-            setMobileDNS(context);
+            setDNS(context, 0);
         } else if (connmgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             Log.d("NCR", "onReceive TYPE_WIFI");
-            setMobileDNS(context);
+            setDNS(context, 1);
         }
     }
 }
