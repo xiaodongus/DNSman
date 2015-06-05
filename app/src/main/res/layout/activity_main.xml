@@ -36,7 +36,7 @@
         android:id="@+id/wDNS1"
         android:hint="DNS1"
         android:inputType="text"
-        android:layout_below="@+id/textView3"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -47,12 +47,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/wDNS2"
         android:hint="DNS2"
+        android:inputType="text"
         android:layout_below="@+id/wDNS1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/wDNS1"
-        android:layout_alignEnd="@+id/wDNS1"
-        android:inputType="text" />
+        android:layout_alignEnd="@+id/wDNS1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:text="@string/wifi_hint"
         android:id="@+id/textView3"
-        android:layout_below="@+id/mDNS2"
+        android:layout_above="@+id/wDNS1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -96,7 +96,30 @@
         android:layout_height="wrap_content"
         android:text="Root permission"
         android:id="@+id/su_checkbox"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/textView4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mDNS3"
+        android:layout_below="@+id/mDNS2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="DNS3 (depend on device)" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wDNS3"
+        android:layout_below="@+id/wDNS2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="DNS3 (depend on device)"
+        android:layout_alignRight="@+id/wDNS2"
+        android:layout_alignEnd="@+id/wDNS2" />
+
 </RelativeLayout>

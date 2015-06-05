@@ -24,22 +24,21 @@ public class NetworkCheckReceiver extends BroadcastReceiver {
         DNSManager dns = new DNSManager();
 
         SharedPreferences sp = context.getSharedPreferences("dnsconf", Context.MODE_PRIVATE);
-        String dns1 = null;
-        String dns2 = null;
+        String[] dnss = new String[4];
+
         Boolean use_su = sp.getBoolean("use_su", false);
         //Mobile network
         if(mode == 0){
-            dns1 = sp.getString("mDNS1", null);
-            dns2 = sp.getString("mDNS2", null);
+            for(int i = 1; i != 4; i++) {
+                dnss[i] = sp.getString("mDNS" + i, null);
+            }
         }else{
-            dns1 = sp.getString("wDNS1", null);
-            dns2 = sp.getString("wDNS2", null);
+            for(int i = 1; i != 4; i++) {
+                dnss[i] = sp.getString("wDNS" + i, null);
+            }
         }
 
-        Log.d("NCR", "DNS1 " + dns1);
-        Log.d("NCR", "DNS2 " + dns2);
-
-        if (dns.setDNSViaSetprop(dns1, dns2, use_su) == 1) {
+        if (dns.setDNSViaSetprop(dnss, use_su) == 1) {
                 Toast.makeText(context, R.string.set_failed, Toast.LENGTH_LONG).show();
         } else {
                 Toast.makeText(context, R.string.set_succeed, Toast.LENGTH_LONG).show();
