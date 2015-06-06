@@ -48,10 +48,12 @@ public class NetworkCheckReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         ConnectivityManager connmgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connmgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED) {
+        NetworkInfo mobi_res = connmgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        NetworkInfo wifi_res = connmgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if(mobi_res != null && mobi_res.isConnected()){
             Log.d("NCR", "onReceive TYPE_MOBILE");
             setDNS(context, 0);
-        } else if (connmgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+        } else if (wifi_res != null && wifi_res.isConnected()){
             Log.d("NCR", "onReceive TYPE_WIFI");
             setDNS(context, 1);
         }
