@@ -94,11 +94,13 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Root permission"
+        android:text="Root permission (It seems needn&apos;t root on CyanogenMod )"
         android:id="@+id/su_checkbox"
         android:layout_above="@+id/textView4"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:checked="false" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -121,5 +123,14 @@
         android:hint="DNS3 (depend on device)"
         android:layout_alignRight="@+id/wDNS2"
         android:layout_alignEnd="@+id/wDNS2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="# Don&apos;t forget to toggle network."
+        android:id="@+id/textView5"
+        android:layout_above="@+id/textView4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
