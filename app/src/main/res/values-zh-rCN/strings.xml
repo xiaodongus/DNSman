@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="set_succeed">设置 DNS 成功。</string>
+    <string name="set_failed">设置 DNS 失败。</string>
+    <string name="action_save">保存</string>
+    <string name="action_samedns">统一 DNS</string>
+    <string name="mobile_hint">移动数据</string>
+    <string name="saved_toast">设置已保存。</string>
+    <string name="su_chk_hint">使用 root 权限。如果正在使用 CM, 也许可以不使用 root 权限。</string>
+    <string name="toggle_hint">不要忘记开关一次网络。</string>
+</resources>

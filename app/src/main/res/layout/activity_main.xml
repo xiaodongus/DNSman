@@ -76,7 +76,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/wifi_hint"
+        android:text="Wi-Fi"
         android:id="@+id/textView3"
         android:layout_above="@+id/wDNS1"
         android:layout_alignParentLeft="true"
@@ -94,13 +94,12 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Root permission (It seems needn&apos;t root on CyanogenMod )"
+        android:text="@string/su_chk_hint"
         android:id="@+id/su_checkbox"
-        android:layout_above="@+id/textView4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="16dp"
-        android:checked="false" />
+        android:checked="false"
+        android:layout_above="@+id/toggle_hint"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -111,7 +110,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="DNS3 (depend on device)" />
+        android:hint="DNS3" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -120,15 +119,15 @@
         android:layout_below="@+id/wDNS2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="DNS3 (depend on device)"
+        android:hint="DNS3"
         android:layout_alignRight="@+id/wDNS2"
         android:layout_alignEnd="@+id/wDNS2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="# Don&apos;t forget to toggle network."
-        android:id="@+id/textView5"
+        android:text="@string/toggle_hint"
+        android:id="@+id/toggle_hint"
         android:layout_above="@+id/textView4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

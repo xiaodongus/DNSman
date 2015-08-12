@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_samedns">同じの DNS</string>
+    <string name="action_save">セーフ</string>
+    <string name="mobile_hint">モバイルネットワーク</string>
+    <string name="saved_toast">設定は保存された。</string>
+    <string name="set_failed">DNS 設定失敗。</string>
+    <string name="set_succeed">DNS 設定完了。</string>
+    <string name="su_chk_hint">スーパユーザーを使う。</string>
+    <string name="toggle_hint">ネットワークをトグルの忘れないで。</string>
+</resources>

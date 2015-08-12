@@ -18,9 +18,9 @@ import io.github.otakuchiyan.dnsman.DNSManager;
 import java.net.UnknownHostException;
 
 public class NetworkCheckReceiver extends BroadcastReceiver {
-    final String CONNECTIVITY_CHANGE_ACTION = new String("android.net.conn.CONNECTIVITY_CHANGE");
+    final String CONNECTIVITY_CHANGE_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
 
-    private void setDNS(Context context, int mode) {
+    private void setDNS(Context context, boolean isMobile) {
         DNSManager dns = new DNSManager();
 
         SharedPreferences sp = context.getSharedPreferences("dnsconf", Context.MODE_PRIVATE);
@@ -28,7 +28,7 @@ public class NetworkCheckReceiver extends BroadcastReceiver {
 
         Boolean use_su = sp.getBoolean("use_su", false);
         //Mobile network
-        if(mode == 0){
+        if(isMobile){
             for(int i = 1; i != 4; i++) {
                 dnss[i] = sp.getString("mDNS" + i, null);
             }
@@ -51,11 +51,9 @@ public class NetworkCheckReceiver extends BroadcastReceiver {
         NetworkInfo mobi_res = connmgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         NetworkInfo wifi_res = connmgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         if(mobi_res != null && mobi_res.isConnected()){
-            Log.d("NCR", "onReceive TYPE_MOBILE");
-            setDNS(context, 0);
+            setDNS(context, true);
         } else if (wifi_res != null && wifi_res.isConnected()){
-            Log.d("NCR", "onReceive TYPE_WIFI");
-            setDNS(context, 1);
+            setDNS(context, false);
         }
     }
 }

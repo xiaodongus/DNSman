@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="set_succeed">設定 DNS 成功。</string>
+    <string name="action_samedns">統一 DNS</string>
+    <string name="action_save">儲存</string>
+    <string name="mobile_hint">行動網路</string>
+    <string name="saved_toast">設定已儲存。</string>
+    <string name="set_failed">設定 DNS 失敗。</string>
+    <string name="su_chk_hint">使用超級使用者權限。如果正使用 CM, 也許可以不使用超級使用者權限。</string>
+    <string name="toggle_hint">不要忘記開關一次網路。</string>
+</resources>

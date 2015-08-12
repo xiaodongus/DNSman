@@ -9,16 +9,15 @@ import java.io.IOException;
 public class DNSManager {
     String net_dns_prop = "net.dns";
 
-
     public int setDNSViaSetprop(String[] dnss, boolean use_su) {
         Process p = null;
         DataOutputStream dos = null;
         String cmd = null;
         try{
-            if(use_su == true){
+            if(use_su){
                 p = Runtime.getRuntime().exec("su");
             }else{
-                p = Runtime.getRuntime().exec("su");
+                p = Runtime.getRuntime().exec("sh");
             }
 
             dos = new DataOutputStream(p.getOutputStream());
@@ -27,11 +26,10 @@ public class DNSManager {
                     continue;
                 }
                 cmd = "setprop " + net_dns_prop + Integer.toString(i) + " " + dnss[i] + "\n";
-                Log.d("DNSManager", "CMD = " + cmd);
                 dos.writeBytes(cmd);
                 dos.flush();
             }
-            if(use_su == true){
+            if(use_su){
                 dos.writeBytes("exit\n");
             }
         } catch (Exception e){
@@ -45,7 +43,6 @@ public class DNSManager {
                 }
             }
         }
-        Log.d("DNSManager", "Set DNS.");
         return 0;
     }
 }
